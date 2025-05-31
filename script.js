@@ -11,9 +11,47 @@ window.addEventListener('load', () => {
     // Try to play audio (may be blocked by browser)
     bgAudio.play().catch(e => {
         console.log('Auto-play prevented by browser');
-        // Show a play button or notification if needed
+        // Create a play prompt
+        createPlayPrompt();
     });
 });
+
+// Create play prompt if autoplay fails
+function createPlayPrompt() {
+    const prompt = document.createElement('div');
+    prompt.className = 'play-prompt';
+    prompt.innerHTML = `
+        <div class="prompt-content">
+            <p>🎵 Click to play "The Revolution Will Not Be Televised"</p>
+            <button class="play-btn">PLAY AUDIO</button>
+        </div>
+    `;
+    prompt.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #000;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    `;
+    
+    document.body.appendChild(prompt);
+    
+    prompt.querySelector('.play-btn').addEventListener('click', () => {
+        bgAudio.play();
+        prompt.remove();
+    });
+    
+    // Also try to play on any user interaction
+    document.addEventListener('click', function playOnClick() {
+        bgAudio.play();
+        prompt.remove();
+        document.removeEventListener('click', playOnClick);
+    }, { once: true });
+}
 
 // Mute/Unmute toggle
 muteBtn.addEventListener('click', () => {
