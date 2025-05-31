@@ -1,0 +1,610 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.05em;
+}
+
+.section-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: #ff0000;
+    margin: 1rem auto;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Floating Navigation */
+.floating-nav {
+    position: fixed;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-right: 1rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #ff0000;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 2px;
+    background: #ff0000;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    width: 8px;
+}
+
+/* Audio Controls */
+.audio-controls {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    border: 1px solid #333;
+}
+
+.audio-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.audio-btn:hover {
+    transform: scale(1.1);
+}
+
+.audio-btn.muted {
+    opacity: 0.5;
+}
+
+#volume-slider {
+    width: 100px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #333;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+#volume-slider:hover {
+    opacity: 1;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #ff0000;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* Landing Section */
+.landing-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.main-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.9;
+    margin-bottom: 2rem;
+}
+
+.title-line {
+    display: block;
+    animation: glitch 2s infinite;
+}
+
+.title-line:nth-child(2) {
+    color: #ff0000;
+    animation-delay: 0.1s;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    opacity: 0.8;
+    margin-bottom: 3rem;
+}
+
+.scroll-indicator {
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+    animation: bounce 2s infinite;
+}
+
+.hero-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    z-index: 1;
+}
+
+/* Sections */
+section {
+    padding: 5rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Context Section */
+.context-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.context-text p {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.timeline {
+    border-left: 2px solid #ff0000;
+    padding-left: 2rem;
+}
+
+.timeline-item {
+    margin-bottom: 2rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.2s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.6s; }
+.timeline-item:nth-child(4) { animation-delay: 0.8s; }
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    background: #ff0000;
+    border-radius: 50%;
+}
+
+.year {
+    display: block;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: #ff0000;
+}
+
+.event {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Why Rock Section */
+.main-quote {
+    font-size: clamp(2rem, 6vw, 4rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-left: 4px solid #ff0000;
+}
+
+.main-quote cite {
+    display: block;
+    font-size: 1.5rem;
+    font-style: normal;
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+.rock-explanation p {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.gallery-item {
+    background: #111;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item:hover {
+    border-color: #ff0000;
+    transform: scale(1.05);
+}
+
+/* Artists Section */
+.artist-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 6rem;
+    padding: 3rem;
+    border: 1px solid #222;
+    transition: all 0.3s ease;
+}
+
+.artist-block:hover {
+    border-color: #ff0000;
+    background: rgba(255, 0, 0, 0.02);
+}
+
+.artist-image {
+    background: #111;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    opacity: 0.7;
+    border: 2px solid #222;
+}
+
+.artist-name {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #ff0000;
+}
+
+.song-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+.song-player {
+    background: #111;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid #333;
+    text-align: center;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expand-btn {
+    background: none;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    padding: 0.75rem 2rem;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.expand-btn:hover {
+    background: #ff0000;
+    color: #000;
+}
+
+.analysis-text {
+    margin-top: 2rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.analysis-text.expanded {
+    max-height: 1000px;
+}
+
+.analysis-text p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+/* Reflection Section */
+.quotes-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.quote-card {
+    padding: 2rem;
+    background: #111;
+    border-left: 4px solid #ff0000;
+    font-style: italic;
+    font-size: 1.125rem;
+    transition: all 0.3s ease;
+}
+
+.quote-card:hover {
+    transform: translateX(10px);
+    background: rgba(255, 0, 0, 0.05);
+}
+
+.reflection-prompt {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 0, 0, 0.03);
+    border: 1px solid #333;
+}
+
+.reflection-prompt p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.reaction-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.reaction-btn {
+    background: none;
+    border: 2px solid #333;
+    padding: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+
+.reaction-btn:hover {
+    border-color: #ff0000;
+    transform: scale(1.1);
+}
+
+.reaction-btn.selected {
+    background: #ff0000;
+    border-color: #ff0000;
+}
+
+.reaction-count {
+    font-size: 1.125rem;
+    opacity: 0.7;
+}
+
+/* Citations Section */
+.citations-section {
+    background: #0a0a0a;
+}
+
+.citations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.citation-category h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #ff0000;
+}
+
+.citation-category ul {
+    list-style: none;
+}
+
+.citation-category li {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.citation-category li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #ff0000;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes glitch {
+    0%, 100% {
+        text-shadow: 
+            0.05em 0 0 rgba(255, 0, 0, 0.75),
+            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    14% {
+        text-shadow: 
+            0.05em 0 0 rgba(255, 0, 0, 0.75),
+            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    15% {
+        text-shadow: 
+            -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    49% {
+        text-shadow: 
+            -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    50% {
+        text-shadow: 
+            0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+            0.05em 0 0 rgba(0, 255, 0, 0.75),
+            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    99% {
+        text-shadow: 
+            0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+            0.05em 0 0 rgba(0, 255, 0, 0.75),
+            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .floating-nav {
+        display: none;
+    }
+    
+    .audio-controls {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .context-content,
+    .artist-block,
+    .citations-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+} 

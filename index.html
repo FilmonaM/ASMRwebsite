@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock // Radicalism // Resistance</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <a href="#home" class="nav-link">Start</a>
+        <a href="#context" class="nav-link">Context</a>
+        <a href="#why-rock" class="nav-link">Why Rock?</a>
+        <a href="#artists" class="nav-link">Artists</a>
+        <a href="#reflection" class="nav-link">Reflection</a>
+        <a href="#citations" class="nav-link">Sources</a>
+    </nav>
+
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button id="mute-btn" class="audio-btn">🔊</button>
+        <input type="range" id="volume-slider" min="0" max="100" value="30">
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="bg-audio" loop>
+        <source src="audio/revolution.mp3" type="audio/mp3">
+        <!-- Add Gil Scott-Heron's "The Revolution Will Not Be Televised" here -->
+    </audio>
+
+    <!-- Section 1: Landing -->
+    <section id="home" class="landing-section">
+        <div class="hero-content">
+            <h1 class="main-title">
+                <span class="title-line">ROCK //</span>
+                <span class="title-line">RADICALISM //</span>
+                <span class="title-line">RESISTANCE</span>
+            </h1>
+            <p class="subtitle">Soundtracking the Black Power Movement</p>
+            <div class="scroll-indicator">↓ SCROLL TO BEGIN ↓</div>
+        </div>
+        <div class="hero-image-placeholder">
+            [HERO IMAGE: Black Panthers with guitars or protest scene with musicians]
+        </div>
+    </section>
+
+    <!-- Section 2: Historical Context -->
+    <section id="context" class="context-section">
+        <div class="container">
+            <h2 class="section-title">THE MOVEMENT</h2>
+            <div class="context-content">
+                <div class="context-text">
+                    <p>The Black Power Movement emerged in the mid-1960s as a revolutionary force demanding self-determination, cultural pride, and an end to systemic oppression. It wasn't just political—it was cultural, artistic, and sonic.</p>
+                    <p>While the Civil Rights Movement sought integration through peaceful protest, Black Power demanded liberation by any means necessary. This radical shift needed a soundtrack equally fierce, uncompromising, and electric.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="year">1966</span>
+                        <span class="event">Black Panther Party Founded</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">1968</span>
+                        <span class="event">MLK Assassinated / Uprising</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">1970</span>
+                        <span class="event">"Machine Gun" Live at Fillmore</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">1975</span>
+                        <span class="event">Death Records "Politicians"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Why Rock? -->
+    <section id="why-rock" class="why-rock-section">
+        <div class="container">
+            <h2 class="section-title">WHY ROCK?</h2>
+            <blockquote class="main-quote">
+                "Rock is Black music."
+                <cite>— Questlove</cite>
+            </blockquote>
+            <div class="rock-explanation">
+                <p>Rock and roll was born from the blues, gospel, and rhythm of Black America. Sister Rosetta Tharpe, Chuck Berry, Little Richard—they created the sound that would shake the world.</p>
+                <p>By the late 60s, Black artists reclaimed rock as a weapon of resistance. The distortion wasn't just sound—it was rage. The volume wasn't just loud—it was a declaration. The lyrics weren't just words—they were revolution.</p>
+                <p>While mainstream America tried to whitewash rock, Black Power artists electrified it with purpose, turning amplifiers into megaphones for liberation.</p>
+            </div>
+            <div class="image-gallery">
+                <div class="gallery-item">[IMAGE: Sister Rosetta Tharpe with guitar]</div>
+                <div class="gallery-item">[IMAGE: Chuck Berry performing]</div>
+                <div class="gallery-item">[IMAGE: Black rock band from 60s/70s]</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Featured Artists -->
+    <section id="artists" class="artists-section">
+        <div class="container">
+            <h2 class="section-title">REVOLUTIONARY SOUNDS</h2>
+            
+            <!-- Artist 1: Jimi Hendrix -->
+            <div class="artist-block" data-artist="hendrix">
+                <div class="artist-image">
+                    [IMAGE: Jimi Hendrix performing "Machine Gun" - intense performance shot]
+                </div>
+                <div class="artist-content">
+                    <h3 class="artist-name">JIMI HENDRIX</h3>
+                    <h4 class="song-title">"Machine Gun" (1970)</h4>
+                    <div class="song-player">
+                        [EMBED: YouTube/Spotify player for "Machine Gun" - Band of Gypsys version]
+                    </div>
+                    <button class="expand-btn" data-target="hendrix-analysis">READ ANALYSIS →</button>
+                    <div class="analysis-text" id="hendrix-analysis">
+                        <p>Hendrix transformed his Stratocaster into a weapon of sonic warfare. "Machine Gun" wasn't just a song—it was an audio documentary of Vietnam, of police brutality, of Black bodies under fire.</p>
+                        <p>The feedback screams like sirens. The wah-wah pedal cries like mothers. The drums pound like boots on pavement. Without singing a single word about politics, Hendrix created the most visceral anti-war statement in rock history.</p>
+                        <p>This was protest through pure sound—making white America feel the violence they exported and inflicted.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Artist 2: Death -->
+            <div class="artist-block" data-artist="death">
+                <div class="artist-image">
+                    [IMAGE: Death band photo - three Black brothers with afros and instruments]
+                </div>
+                <div class="artist-content">
+                    <h3 class="artist-name">DEATH</h3>
+                    <h4 class="song-title">"Politicians In My Eyes" (1975)</h4>
+                    <div class="song-player">
+                        [EMBED: YouTube/Spotify player for "Politicians In My Eyes"]
+                    </div>
+                    <button class="expand-btn" data-target="death-analysis">READ ANALYSIS →</button>
+                    <div class="analysis-text" id="death-analysis">
+                        <p>Three brothers from Detroit created punk rock before punk rock existed. Death's raw, unfiltered rage predated the Sex Pistols, but because they were Black, the world wasn't ready.</p>
+                        <p>"Politicians In My Eyes" strips rock to its bones—pure velocity, pure anger. The lyrics spit truth about government lies and corruption with no metaphors, no poetry, just fury.</p>
+                        <p>Ignored for decades, Death's music proved that Black artists weren't just part of punk's story—they wrote the first chapter. Their rejection by labels wasn't about the music; it was about an industry that couldn't imagine Black punk.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Artist 3: Sly & the Family Stone -->
+            <div class="artist-block" data-artist="sly">
+                <div class="artist-image">
+                    [IMAGE: Sly & the Family Stone - integrated band on stage, powerful performance]
+                </div>
+                <div class="artist-content">
+                    <h3 class="artist-name">SLY & THE FAMILY STONE</h3>
+                    <h4 class="song-title">"Don't Call Me N****r, Whitey" (1969)</h4>
+                    <div class="song-player">
+                        [EMBED: YouTube/Spotify player for the song]
+                    </div>
+                    <button class="expand-btn" data-target="sly-analysis">READ ANALYSIS →</button>
+                    <div class="analysis-text" id="sly-analysis">
+                        <p>Sly Stone didn't just integrate his band—he created a musical United Nations that showed what America could be while calling out what it was. This song was a sonic confrontation, putting racism's ugliest word in the title and on the radio.</p>
+                        <p>The track pulses with funk-rock fusion, but the message is pure revolution. The call-and-response format turns slurs into a dialogue about power, making white audiences confront their complicity.</p>
+                        <p>This wasn't flower-power integration—this was integration with a fist raised, demanding respect through sonic force.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Reflection -->
+    <section id="reflection" class="reflection-section">
+        <div class="container">
+            <h2 class="section-title">WHAT DOES RESISTANCE SOUND LIKE TODAY?</h2>
+            <div class="quotes-wall">
+                <div class="quote-card">
+                    "Music is the weapon of the future" - Fela Kuti
+                </div>
+                <div class="quote-card">
+                    "Your silence will not protect you" - Audre Lorde
+                </div>
+                <div class="quote-card">
+                    "The revolution will be live" - Public Enemy
+                </div>
+                <div class="quote-card">
+                    "We want freedom by any means necessary" - Malcolm X
+                </div>
+            </div>
+            <div class="reflection-prompt">
+                <p>From Hendrix to Beyoncé, from Death to Death Grips, Black artists continue to use sound as resistance. What does your revolution sound like?</p>
+                <div class="reaction-buttons">
+                    <button class="reaction-btn" data-reaction="fist">✊🏽</button>
+                    <button class="reaction-btn" data-reaction="music">🎧</button>
+                    <button class="reaction-btn" data-reaction="fire">🔥</button>
+                    <button class="reaction-btn" data-reaction="heart">❤️</button>
+                </div>
+                <div class="reaction-count"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Works Cited -->
+    <section id="citations" class="citations-section">
+        <div class="container">
+            <h2 class="section-title">SOURCES</h2>
+            <div class="citations-grid">
+                <div class="citation-category">
+                    <h3>Secondary Sources</h3>
+                    <ul>
+                        <li>Chang, Jeff. <em>Can't Stop Won't Stop: A History of the Hip-Hop Generation</em>. New York: St. Martin's Press, 2005.</li>
+                        <li>Joseph, Peniel E. <em>Waiting 'Til the Midnight Hour: A Narrative History of Black Power in America</em>. New York: Henry Holt, 2006.</li>
+                        <li>Mahon, Maureen. <em>Black Diamond Queens: African American Women and Rock and Roll</em>. Duke University Press, 2020.</li>
+                    </ul>
+                </div>
+                <div class="citation-category">
+                    <h3>Primary Sources</h3>
+                    <ul>
+                        <li>Hendrix, Jimi. "Machine Gun." <em>Band of Gypsys</em>. Capitol Records, 1970.</li>
+                        <li>Death. "Politicians In My Eyes." Recorded 1975. <em>...For the Whole World to See</em>. Drag City, 2009.</li>
+                        <li><em>The Black Panther</em> newspaper archives, 1967-1971. [Various issues documenting cultural revolution]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 
