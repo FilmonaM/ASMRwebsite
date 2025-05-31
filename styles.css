@@ -106,6 +106,34 @@ h1, h2, h3, h4 {
     padding: 0.5rem 1rem;
     border-radius: 25px;
     border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.audio-controls.fading {
+    border-color: #ff0000;
+    opacity: 0.7;
+}
+
+.audio-controls::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: 10px;
+    font-size: 0.75rem;
+    color: #ff0000;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.audio-controls.fading::after {
+    content: 'Audio fading...';
+    opacity: 1;
+}
+
+.audio-controls.paused::after {
+    content: 'Audio paused (scroll up to resume)';
+    opacity: 1;
 }
 
 .audio-btn {

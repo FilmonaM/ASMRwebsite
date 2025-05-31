@@ -3,10 +3,16 @@ const bgAudio = document.getElementById('bg-audio');
 const muteBtn = document.getElementById('mute-btn');
 const volumeSlider = document.getElementById('volume-slider');
 
+// Audio fade variables
+let baseVolume = 0.3;
+let audioScrollMultiplier = 1;
+let audioWasPaused = false;
+
 // Initialize audio
 window.addEventListener('load', () => {
     // Set initial volume
-    bgAudio.volume = 0.3;
+    bgAudio.volume = baseVolume;
+    volumeSlider.value = baseVolume * 100;
     
     // Try to play audio (may be blocked by browser)
     bgAudio.play().catch(e => {
@@ -57,6 +63,7 @@ function createPlayPrompt() {
 muteBtn.addEventListener('click', () => {
     if (bgAudio.muted) {
         bgAudio.muted = false;
+        bgAudio.volume = baseVolume * audioScrollMultiplier; // Apply current scroll multiplier
         muteBtn.textContent = '🔊';
         muteBtn.classList.remove('muted');
     } else {
@@ -68,7 +75,9 @@ muteBtn.addEventListener('click', () => {
 
 // Volume control
 volumeSlider.addEventListener('input', (e) => {
-    bgAudio.volume = e.target.value / 100;
+    const sliderValue = e.target.value / 100;
+    bgAudio.volume = sliderValue * audioScrollMultiplier; // Apply scroll multiplier
+    baseVolume = sliderValue; // Store base volume
     if (e.target.value == 0) {
         muteBtn.textContent = '🔇';
         muteBtn.classList.add('muted');
@@ -76,6 +85,59 @@ volumeSlider.addEventListener('input', (e) => {
         muteBtn.textContent = '🔊';
         muteBtn.classList.remove('muted');
         bgAudio.muted = false;
+    }
+});
+
+// Audio fade on scroll
+window.addEventListener('scroll', () => {
+    const scrollY = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const fadeStartPoint = windowHeight * 0.5; // Start fading after half viewport
+    const fadeEndPoint = windowHeight * 2; // Completely fade out after 2 viewports
+    const pausePoint = windowHeight * 2.5; // Pause audio after 2.5 viewports
+    
+    const audioControls = document.querySelector('.audio-controls');
+    
+    // Calculate volume multiplier based on scroll position
+    if (scrollY <= fadeStartPoint) {
+        audioScrollMultiplier = 1;
+        audioControls.classList.remove('fading', 'paused');
+    } else if (scrollY >= fadeEndPoint) {
+        audioScrollMultiplier = 0;
+        if (scrollY > pausePoint) {
+            audioControls.classList.remove('fading');
+            audioControls.classList.add('paused');
+        } else {
+            audioControls.classList.add('fading');
+            audioControls.classList.remove('paused');
+        }
+    } else {
+        // Linear fade between start and end points
+        const fadeProgress = (scrollY - fadeStartPoint) / (fadeEndPoint - fadeStartPoint);
+        audioScrollMultiplier = 1 - fadeProgress;
+        audioControls.classList.add('fading');
+        audioControls.classList.remove('paused');
+    }
+    
+    // Apply volume change if audio is not muted
+    if (!bgAudio.muted && !audioWasPaused) {
+        bgAudio.volume = baseVolume * audioScrollMultiplier;
+    }
+    
+    // Pause/resume based on scroll position
+    if (scrollY > pausePoint && !bgAudio.paused && !audioWasPaused) {
+        bgAudio.pause();
+        audioWasPaused = true;
+    } else if (scrollY <= pausePoint && audioWasPaused) {
+        bgAudio.play().catch(e => console.log('Resume prevented by browser'));
+        audioWasPaused = false;
+    }
+    
+    // Update volume slider visual feedback
+    if (audioScrollMultiplier < 0.1 && !bgAudio.muted) {
+        muteBtn.style.opacity = '0.5';
+    } else {
+        muteBtn.style.opacity = '1';
     }
 });
 
