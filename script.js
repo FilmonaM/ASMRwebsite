@@ -88,6 +88,59 @@ volumeSlider.addEventListener('input', (e) => {
     }
 });
 
+// Audio fade on scroll
+window.addEventListener('scroll', () => {
+    const scrollY = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const fadeStartPoint = windowHeight * 0.5; // Start fading after half viewport
+    const fadeEndPoint = windowHeight * 2; // Completely fade out after 2 viewports
+    const pausePoint = windowHeight * 2.5; // Pause audio after 2.5 viewports
+    
+    const audioControls = document.querySelector('.audio-controls');
+    
+    // Calculate volume multiplier based on scroll position
+    if (scrollY <= fadeStartPoint) {
+        audioScrollMultiplier = 1;
+        audioControls.classList.remove('fading', 'paused');
+    } else if (scrollY >= fadeEndPoint) {
+        audioScrollMultiplier = 0;
+        if (scrollY > pausePoint) {
+            audioControls.classList.remove('fading');
+            audioControls.classList.add('paused');
+        } else {
+            audioControls.classList.add('fading');
+            audioControls.classList.remove('paused');
+        }
+    } else {
+        // Linear fade between start and end points
+        const fadeProgress = (scrollY - fadeStartPoint) / (fadeEndPoint - fadeStartPoint);
+        audioScrollMultiplier = 1 - fadeProgress;
+        audioControls.classList.add('fading');
+        audioControls.classList.remove('paused');
+    }
+    
+    // Apply volume change if audio is not muted
+    if (!bgAudio.muted && !audioWasPaused) {
+        bgAudio.volume = baseVolume * audioScrollMultiplier;
+    }
+    
+    // Pause/resume based on scroll position
+    if (scrollY > pausePoint && !bgAudio.paused && !audioWasPaused) {
+        bgAudio.pause();
+        audioWasPaused = true;
+    } else if (scrollY <= pausePoint && audioWasPaused) {
+        bgAudio.play().catch(e => console.log('Resume prevented by browser'));
+        audioWasPaused = false;
+    }
+    
+    // Update volume slider visual feedback
+    if (audioScrollMultiplier < 0.1 && !bgAudio.muted) {
+        muteBtn.style.opacity = '0.5';
+    } else {
+        muteBtn.style.opacity = '1';
+    }
+});
+
 // Navigation Active State
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -283,207 +336,4 @@ window.addEventListener('scroll', throttle(() => {
             link.classList.add('active');
         }
     });
-}, 100));
-
-// Multi-Audio System
-const audioSources = {
-    revolution: {
-        src: 'audio/revolution.mp3',
-        element: bgAudio,
-        section: 'home',
-        fadeStart: 0.5,
-        fadeEnd: 2,
-        pausePoint: 2.5
-    },
-    hendrix: {
-        src: 'https://www.youtube.com/watch?v=AJw_XqvsSIs', // For reference
-        element: null,
-        section: 'artists',
-        fadeStart: 0.2,
-        fadeEnd: 1,
-        pausePoint: 1.5
-    },
-    death: {
-        src: 'https://www.youtube.com/watch?v=RL3odt3WrUQ', // For reference
-        element: null,
-        section: 'artists',
-        fadeStart: 0.2,
-        fadeEnd: 1,
-        pausePoint: 1.5
-    },
-    sly: {
-        src: 'https://www.youtube.com/watch?v=bXjnakAlF-s', // For reference
-        element: null,
-        section: 'artists',
-        fadeStart: 0.2,
-        fadeEnd: 1,
-        pausePoint: 1.5
-    }
-};
-
-// Create audio elements for additional tracks
-['hendrix', 'death', 'sly'].forEach(track => {
-    const audio = document.createElement('audio');
-    audio.id = `${track}-audio`;
-    audio.loop = true;
-    audio.preload = 'none';
-    
-    // Add placeholder sources - in production, these would be actual MP3 files
-    const source = document.createElement('source');
-    source.src = `audio/${track}.mp3`; // You'll need to add these files
-    source.type = 'audio/mpeg';
-    audio.appendChild(source);
-    
-    document.body.appendChild(audio);
-    audioSources[track].element = audio;
-});
-
-let currentAudio = 'revolution';
-let manualAudioSelection = null;
-
-// Handle play section audio buttons
-document.querySelectorAll('.play-section-audio').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const audioKey = btn.getAttribute('data-audio');
-        
-        // Stop all other audio
-        Object.keys(audioSources).forEach(key => {
-            if (key !== audioKey && audioSources[key].element) {
-                audioSources[key].element.pause();
-                audioSources[key].element.currentTime = 0;
-            }
-        });
-        
-        // Remove playing class from all buttons
-        document.querySelectorAll('.play-section-audio').forEach(b => {
-            b.classList.remove('playing');
-            b.textContent = 'PLAY IN BACKGROUND →';
-        });
-        
-        // Toggle current audio
-        const audio = audioSources[audioKey];
-        if (audio && audio.element) {
-            if (audio.element.paused) {
-                // Set manual selection
-                manualAudioSelection = audioKey;
-                currentAudio = audioKey;
-                
-                // Play the audio
-                audio.element.volume = baseVolume;
-                audio.element.play().catch(e => {
-                    console.log('Playback failed:', e);
-                    alert('Audio file not found. In production, you would add ' + audioKey + '.mp3 to the audio folder.');
-                });
-                
-                // Update button
-                btn.classList.add('playing');
-                btn.textContent = 'PAUSE ⏸';
-            } else {
-                // Pause
-                audio.element.pause();
-                manualAudioSelection = null;
-                btn.classList.remove('playing');
-                btn.textContent = 'PLAY IN BACKGROUND →';
-            }
-        }
-    });
-});
-
-// Enhanced scroll handler for multi-audio
-window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-    const windowHeight = window.innerHeight;
-    
-    // Get current section
-    let currentSection = 'home';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (scrollY >= sectionTop - windowHeight / 2) {
-            currentSection = section.getAttribute('id');
-        }
-    });
-    
-    // Special handling for artists section
-    if (currentSection === 'artists' && !manualAudioSelection) {
-        // Auto-pause revolution audio when entering artists section
-        if (currentAudio === 'revolution' && !bgAudio.paused) {
-            bgAudio.pause();
-        }
-        return; // Don't auto-play anything in artists section unless manually selected
-    }
-    
-    // Handle revolution audio for non-artists sections
-    if (currentSection !== 'artists' && !manualAudioSelection) {
-        const fadeStartPoint = windowHeight * 0.5;
-        const fadeEndPoint = windowHeight * 2;
-        const pausePoint = windowHeight * 2.5;
-        
-        const audioControls = document.querySelector('.audio-controls');
-        
-        // Revolution audio fade logic (existing code)
-        if (scrollY <= fadeStartPoint) {
-            audioScrollMultiplier = 1;
-            audioControls.classList.remove('fading', 'paused');
-        } else if (scrollY >= fadeEndPoint) {
-            audioScrollMultiplier = 0;
-            if (scrollY > pausePoint) {
-                audioControls.classList.remove('fading');
-                audioControls.classList.add('paused');
-            } else {
-                audioControls.classList.add('fading');
-                audioControls.classList.remove('paused');
-            }
-        } else {
-            const fadeProgress = (scrollY - fadeStartPoint) / (fadeEndPoint - fadeStartPoint);
-            audioScrollMultiplier = 1 - fadeProgress;
-            audioControls.classList.add('fading');
-            audioControls.classList.remove('paused');
-        }
-        
-        // Apply volume change if audio is not muted
-        if (!bgAudio.muted && !audioWasPaused) {
-            bgAudio.volume = baseVolume * audioScrollMultiplier;
-        }
-        
-        // Pause/resume based on scroll position
-        if (scrollY > pausePoint && !bgAudio.paused && !audioWasPaused) {
-            bgAudio.pause();
-            audioWasPaused = true;
-        } else if (scrollY <= pausePoint && audioWasPaused) {
-            bgAudio.play().catch(e => console.log('Resume prevented by browser'));
-            audioWasPaused = false;
-        }
-    }
-    
-    // Handle manual audio selection fade
-    if (manualAudioSelection && audioSources[manualAudioSelection]) {
-        const audio = audioSources[manualAudioSelection];
-        const sectionEl = document.querySelector(`[data-artist="${manualAudioSelection}"]`);
-        
-        if (sectionEl) {
-            const sectionTop = sectionEl.offsetTop;
-            const sectionBottom = sectionTop + sectionEl.offsetHeight;
-            const fadeDistance = windowHeight;
-            
-            let volumeMultiplier = 1;
-            
-            // Fade out when scrolling away from the section
-            if (scrollY < sectionTop - fadeDistance) {
-                volumeMultiplier = Math.max(0, 1 - (sectionTop - fadeDistance - scrollY) / fadeDistance);
-            } else if (scrollY > sectionBottom) {
-                volumeMultiplier = Math.max(0, 1 - (scrollY - sectionBottom) / fadeDistance);
-            }
-            
-            if (audio.element && !audio.element.paused) {
-                audio.element.volume = baseVolume * volumeMultiplier;
-            }
-        }
-    }
-    
-    // Update volume slider visual feedback
-    if (audioScrollMultiplier < 0.1 && !bgAudio.muted) {
-        muteBtn.style.opacity = '0.5';
-    } else {
-        muteBtn.style.opacity = '1';
-    }
-}); 
+}, 100)); 
