@@ -29,6 +29,10 @@
     <!-- Now Playing Indicator -->
     <div class="now-playing" id="now-playing">
         <div class="now-playing-content">
+            <button class="now-playing-control" id="now-playing-control" title="Pause/Play">
+                <span class="control-play">▶</span>
+                <span class="control-pause">❚❚</span>
+            </button>
             <span class="now-playing-label">Now Playing:</span>
             <span class="now-playing-title" id="now-playing-title">The Revolution Will Not Be Televised</span>
             <span class="now-playing-time" id="now-playing-time">0:00 / 0:00</span>
@@ -67,33 +71,34 @@
             <div class="context-content">
                 <div class="context-text">
                     <p>The Black Power Movement emerged in the mid-1960s demanding self-determination and cultural pride. It wasn't just political—it was sonic.</p>
-                    <p>This radical shift from peaceful protest to liberation "by any means necessary" needed an equally fierce soundtrack.</p>
+                    <p>This radical shift from peaceful protest to liberation "by any means necessary" needed an equally fierce soundtrack. Music became the heartbeat of revolution, carrying messages that mainstream media wouldn't broadcast and expressing rage that polite society wouldn't acknowledge.</p>
+                    <p>As African American musicians had shaped every major American musical form—from spirituals to jazz, blues to rock—they now turned their art into a weapon of resistance. The electric guitar became a voice of protest, the drum kit a call to action.</p>
                 </div>
                 <div class="timeline">
                     <div class="timeline-item">
                         <span class="year">1966</span>
                         <span class="event">Black Panther Party Founded</span>
-                        <span class="detail">October - Oakland, CA</span>
+                        <span class="detail">October - Oakland, CA<br>Huey Newton and Bobby Seale establish the party for self-defense, creating a ten-point program demanding freedom, employment, and an end to police brutality</span>
                     </div>
                     <div class="timeline-item">
                         <span class="year">1968</span>
                         <span class="event">Panthers at Peak Influence</span>
-                        <span class="detail">Chapters in major cities nationwide</span>
+                        <span class="detail">Chapters in major cities nationwide<br>Free breakfast programs feed thousands of children daily while the party's cultural influence spreads through music, art, and fashion</span>
                     </div>
                     <div class="timeline-item">
                         <span class="year">1969</span>
                         <span class="event">FBI Targets Panthers</span>
-                        <span class="detail">COINTELPRO intensifies operations</span>
+                        <span class="detail">COINTELPRO intensifies operations<br>J. Edgar Hoover declares the Panthers "the greatest threat to internal security" as surveillance, infiltration, and violent raids escalate</span>
                     </div>
                     <div class="timeline-item">
                         <span class="year">1970</span>
                         <span class="event">Hendrix's Political Awakening</span>
-                        <span class="detail">Performances become more radical</span>
+                        <span class="detail">Performances become more radical<br>His rendition of the national anthem at Woodstock becomes an anti-war statement; connections to Black Power movement deepen</span>
                     </div>
                     <div class="timeline-item">
                         <span class="year">1975</span>
                         <span class="event">Movement Evolution</span>
-                        <span class="detail">Cultural impact continues through music</span>
+                        <span class="detail">Cultural impact continues through music<br>Though formal organizations fragment under government pressure, the spirit of Black Power lives on in punk, funk, and hip-hop</span>
                     </div>
                     <p class="timeline-source">Sources: HISTORY.com, Carnegie Hall African American Music Timeline</p>
                 </div>
@@ -117,9 +122,12 @@
                 </p>
             </div>
             <div class="image-gallery">
-                <div class="gallery-item">[IMAGE: Sister Rosetta Tharpe with guitar]</div>
-                <div class="gallery-item">[IMAGE: Chuck Berry performing]</div>
-                <div class="gallery-item">[IMAGE: Black rock band from 60s/70s]</div>
+                <div class="gallery-item">
+                    <img src="images/sisterrosetta.webp" alt="Sister Rosetta Tharpe with guitar" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/chuckberry.webp" alt="Chuck Berry performing" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
             </div>
         </div>
     </section>
@@ -191,62 +199,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Artist 2: Death -->
-            <div class="artist-block" data-artist="death">
-                <div class="artist-image">
-                    [IMAGE: Death band photo - three Black brothers with afros and instruments]
-                </div>
-                <div class="artist-content">
-                    <h3 class="artist-name">DEATH</h3>
-                    <h4 class="song-title">"Politicians In My Eyes" (1975)</h4>
-                    <div class="song-player">
-                        <audio class="artist-audio" id="death-audio">
-                            <source src="audio/politicians.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <div class="custom-player">
-                            <button class="play-pause-btn" data-audio="death-audio">
-                                <span class="play-icon">▶</span>
-                                <span class="pause-icon" style="display: none;">❚❚</span>
-                            </button>
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                    <div class="progress-handle"></div>
-                                </div>
-                                <div class="time-display">
-                                    <span class="current-time">0:00</span>
-                                    <span class="duration">0:00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="expand-btn" data-target="death-analysis">READ ANALYSIS →</button>
-                    <button class="expand-btn lyrics-btn" data-target="death-lyrics">VIEW LYRICS →</button>
-                    <div class="analysis-text" id="death-analysis">
-                        <p>Three brothers from Detroit created punk rock before punk existed. Death's raw sound predated the Sex Pistols, but because they were Black, the world wasn't ready.</p>
-                        <p>"Politicians In My Eyes" strips rock to pure velocity and anger, spitting truth about corruption with unfiltered fury. Their music proved Black artists didn't just influence punk—they invented it.</p>
-                    </div>
-                    <div class="lyrics-text" id="death-lyrics">
-                        <div class="lyrics-container">
-                            <p class="lyrics-notice">
-                                <strong>Politicians In My Eyes</strong><br>
-                                Death (1975)
-                            </p>
-                            <div class="lyrics-content">
-                                <p>[Verse 1]<br>
-                                <em>(Add full lyrics here)</em></p>
-                                
-                                <p class="add-lyrics-note">
-                                    📝 To add lyrics: Copy from Genius.com or other sources<br>
-                                    Search: "Death Politicians In My Eyes lyrics"
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -278,14 +230,19 @@
     <section id="citations" class="citations-section">
         <div class="container">
             <h2 class="section-title">SOURCES</h2>
-            <div class="citations-grid">
-                <div class="citation-category">
-                    <h3>References</h3>
-                    <ul>
-                        <li>Hall, Carnegie. "African American Music Timeline." <em>Carnegiehall.org</em>, 11 Jan. 2022, www.carnegiehall.org/Explore/Articles/2022/01/11/Timeline-of-African-American-Music. Accessed 31 May 2025.</li>
-                        <li>Keyes, Karrie. "Black Music Influenced the Culture & Music of the United States and the World. - SoundGirls.org." <em>SoundGirls.org</em>, 24 Feb. 2021, soundgirls.org/black-music-influenced-the-culture-music-of-the-united-states-and-the-world/. Accessed 31 May 2025.</li>
-                        <li>HISTORY.com Editors. "Black Panthers | HISTORY , Definition & Timeline | HISTORY." <em>HISTORY</em>, 3 Nov. 2017, www.history.com/articles/black-panthers. Accessed 6 June 2025.</li>
-                        <li>Alexandre G. "Jimi Hendrix and the Black Panther Party: A Counterculture Movement." <em>Musiclipse</em>, 5 Sept. 2023, www.musiclipse.com/2023/09/05/jimi-hendrix-and-the-black-panther-party-a-counterculture-movement/. Accessed 6 June 2025.</li>
+            <div class="citations-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="citation-column">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 1rem;">Hall, Carnegie. "African American Music Timeline." <em>Carnegiehall.org</em>, 11 Jan. 2022, www.carnegiehall.org/Explore/Articles/2022/01/11/Timeline-of-African-American-Music. Accessed 31 May 2025.</li>
+                        <li style="margin-bottom: 1rem;">Keyes, Karrie. "Black Music Influenced the Culture & Music of the United States and the World. - SoundGirls.org." <em>SoundGirls.org</em>, 24 Feb. 2021, soundgirls.org/black-music-influenced-the-culture-music-of-the-united-states-and-the-world/. Accessed 31 May 2025.</li>
+                        <li style="margin-bottom: 1rem;">HISTORY.com Editors. "Black Panthers | HISTORY , Definition & Timeline | HISTORY." <em>HISTORY</em>, 3 Nov. 2017, www.history.com/articles/black-panthers. Accessed 6 June 2025.</li>
+                    </ul>
+                </div>
+                <div class="citation-column">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 1rem;">Alexandre G. "Jimi Hendrix and the Black Panther Party: A Counterculture Movement." <em>Musiclipse</em>, 5 Sept. 2023, www.musiclipse.com/2023/09/05/jimi-hendrix-and-the-black-panther-party-a-counterculture-movement/. Accessed 6 June 2025.</li>
+                        <li style="margin-bottom: 1rem;">Shelton-Ormond, Charlie, and Frank Stasio. "Remembering the Legacy of Sister Rosetta Tharpe." <em>WUNC</em>, 24 May 2016, www.wunc.org/arts-culture/2016-05-24/remembering-the-legacy-of-sister-rosetta-tharpe. Accessed 6 June 2025.</li>
+                        <li style="margin-bottom: 1rem;">Paul, Larisha. "Chuck Berry's 'Live from Blueberry Hill' Announced." <em>Rolling Stone</em>, 18 Oct. 2021, www.rollingstone.com/music/music-news/chuck-berry-live-from-blueberry-hill-1243585/. Accessed 6 June 2025.</li>
                     </ul>
                 </div>
             </div>

@@ -8,6 +8,9 @@ const nowPlaying = document.getElementById('now-playing');
 const nowPlayingTitle = document.getElementById('now-playing-title');
 const nowPlayingTime = document.getElementById('now-playing-time');
 const nowPlayingBar = document.getElementById('now-playing-bar');
+const nowPlayingControl = document.getElementById('now-playing-control');
+const controlPlay = nowPlayingControl.querySelector('.control-play');
+const controlPause = nowPlayingControl.querySelector('.control-pause');
 
 // Audio fade variables
 let baseVolume = 0.3;
@@ -56,10 +59,25 @@ function updateNowPlayingLabel() {
     const label = document.querySelector('.now-playing-label');
     if (currentlyPlaying && !currentlyPlaying.paused) {
         label.textContent = 'Now Playing:';
+        controlPlay.style.display = 'none';
+        controlPause.style.display = 'inline';
     } else {
         label.textContent = 'Paused:';
+        controlPlay.style.display = 'inline';
+        controlPause.style.display = 'none';
     }
 }
+
+// Add click handler for now playing control button
+nowPlayingControl.addEventListener('click', () => {
+    if (currentlyPlaying) {
+        if (currentlyPlaying.paused) {
+            currentlyPlaying.play();
+        } else {
+            currentlyPlaying.pause();
+        }
+    }
+});
 
 // Initialize audio
 window.addEventListener('load', () => {
