@@ -319,14 +319,29 @@ section:not(.landing-section) {
 .context-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 3rem;
     align-items: start;
 }
 
-.context-text p {
+.context-text-box {
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid #ff0000;
+    border-radius: 8px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.context-text-box p {
     font-size: 1.125rem;
     margin-bottom: 1.5rem;
     opacity: 0.9;
+    line-height: 1.8;
+    color: #fff;
+}
+
+.context-text-box p:last-child {
+    margin-bottom: 0;
 }
 
 .timeline {
@@ -1129,6 +1144,14 @@ section:not(.landing-section) {
     .impact-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    .context-text-box {
+        padding: 1.5rem;
+    }
+    
+    .context-text-box p {
+        font-size: 1rem;
     }
     
     .main-title {
