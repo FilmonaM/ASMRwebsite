@@ -318,7 +318,7 @@ section:not(.landing-section) {
 /* Context Section */
 .context-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 450px 1fr;
     gap: 3rem;
     align-items: start;
 }
@@ -327,7 +327,7 @@ section:not(.landing-section) {
     background: rgba(0, 0, 0, 0.95);
     border: 2px solid #ff0000;
     border-radius: 8px;
-    padding: 2.5rem;
+    padding: 2rem;
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
 }
@@ -1083,6 +1083,11 @@ section:not(.landing-section) {
 }
 
 @media (max-width: 1024px) {
+    .context-content {
+        grid-template-columns: 400px 1fr;
+        gap: 2rem;
+    }
+    
     .video-container {
         max-width: 700px;
         flex-direction: column;
@@ -1096,6 +1101,12 @@ section:not(.landing-section) {
     
     .video-text-box {
         width: 100%;
+    }
+}
+
+@media (max-width: 850px) {
+    .context-content {
+        grid-template-columns: 350px 1fr;
     }
 }
 
