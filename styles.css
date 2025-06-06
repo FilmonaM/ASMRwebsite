@@ -411,18 +411,22 @@ section:not(.landing-section) {
 
 .video-container {
     position: relative;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 }
 
 .video-embed {
-    width: 100%;
-    height: 450px;
+    width: 700px;
+    height: 394px; /* 16:9 ratio */
     border: 2px solid #222;
     border-radius: 8px;
     overflow: hidden;
     background: #000;
     position: relative;
+    flex-shrink: 0;
 }
 
 .video-embed iframe {
@@ -434,11 +438,7 @@ section:not(.landing-section) {
 }
 
 .video-text-box {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 300px;
+    width: 350px;
     background: rgba(0, 0, 0, 0.95);
     border: 2px solid #ff0000;
     border-radius: 8px;
@@ -448,7 +448,7 @@ section:not(.landing-section) {
 }
 
 .video-text-box p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1rem;
     opacity: 0.9;
@@ -1051,18 +1051,36 @@ section:not(.landing-section) {
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+    .video-container {
+        max-width: 1000px;
+        padding: 0 2rem;
+    }
+    
+    .video-embed {
+        width: 600px;
+        height: 338px;
+    }
+    
+    .video-text-box {
+        width: 300px;
+    }
+}
+
 @media (max-width: 1024px) {
     .video-container {
         max-width: 700px;
+        flex-direction: column;
+        gap: 1.5rem;
     }
     
     .video-embed {
         width: 100%;
-        height: 350px;
+        height: 394px;
     }
     
     .video-text-box {
-        width: 250px;
+        width: 100%;
     }
 }
 
@@ -1153,32 +1171,31 @@ section:not(.landing-section) {
     
     .video-embed {
         width: 100%;
-        height: 225px; /* maintains 16:9 ratio for mobile width */
+        height: 281px; /* maintains 16:9 ratio for mobile width */
         margin: 0 auto;
     }
     
     .video-text-box {
-        width: 200px;
-        right: 10px;
-        padding: 1rem;
+        width: 100%;
+        padding: 1.5rem;
     }
     
     .video-text-box p {
-        font-size: 0.8rem;
+        font-size: 0.95rem;
     }
 }
 
 @media (max-width: 480px) {
     .video-embed {
-        height: 200px;
+        height: 225px;
     }
     
     .video-text-box {
-        position: static;
-        transform: none;
-        width: 100%;
-        margin-top: 1rem;
-        right: auto;
+        padding: 1rem;
+    }
+    
+    .video-text-box p {
+        font-size: 0.9rem;
     }
 }
 
